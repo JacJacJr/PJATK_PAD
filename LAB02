@@ -1,0 +1,74 @@
+import numpy as np
+
+#zad 1
+data = pd.read_csv('president_heights.csv')
+
+heights = np.array(data['height(cm)'])
+
+mean_heights = np.mean(heights)
+sd_heights = np.std(heights)
+min_heights = np.amin(heights)
+max_heights = np.amax(heights)
+per25_heights = np.percentile(heights, 25)
+per75_heights = np.percentile(heights, 75)
+median_heights = np.median(heights)
+print("Mean height:       ", mean_heights )
+print("Standard deviation:", sd_heights)
+print("Minimum height:    ", min_heights)
+print("Maximum height:    ", max_heights)
+print("25th percentile:   ", per25_heights)
+print("Median:            ", median_heights)
+print("75th percentile:   ", per75_heights)
+
+#zad 2
+data = np.genfromtxt('Zadanie_2.csv', delimiter=';')
+
+eigenvectors_dane2 = np.linalg.eig(data)
+print(eigenvectors_dane2)
+
+inv_data2 = np.linalg.inv(data)
+print(inv_data2)
+
+#zad3
+rainfall = pd.read_csv('Seattle2014.csv')['PRCP'].values
+inches = rainfall/254.0
+inches.shape
+
+i = inches
+not_raining = i[i<=0].shape[0]
+was_raining = i[i>0].shape[0]
+more_than_0_5 = i[i>0.5].shape[0]
+less_than_0_2_num = i[i>0].shape[0] - i[i>=0.2].shape[0]
+was_raining_median = np.median(i[i>0])
+
+inches_summer = i[171:261]
+was_raining_median_summer = np.median(inches_summer[inches_summer>0])
+was_raining_max_summer = np.amax(inches_summer)
+
+a = i[:171].shape
+b = i[261:].shape
+was_raining_median_non_summer = np.median(np.hstack((a,b)))
+%matplotlib inline
+import matplotlib.pyplot as plt
+import seaborn; seaborn.set()
+plt.hist(inches)
+
+print("Number days without rain:      ", not_raining)
+print("Number days with rain:         ", was_raining)
+print("Days with more than 0.5 inches:", more_than_0_5)
+print("Rainy days with < 0.2 inches  :", less_than_0_2_num)
+print("Median precip on rainy days in 2014 (inches): ", was_raining_median)
+print("Median precip on summer days in 2014 (inches):  ", was_raining_median_summer)
+print("Maximum precip on summer days in 2014 (inches): ", was_raining_max_summer)
+print("Median precip on non-summer rainy days (inches):", was_raining_median_non_summer)
+
+#Zad4
+
+A = [0,3,2,5]
+B = [0,3,1,4]
+
+sum = np.add(A,B)
+dif = np.subtract(B,A)
+A_mult = np.multiply(A,4)
+A_vect_scal = numpy.dot(A,B)
+lenght_B = np.linalg.norm(B)
